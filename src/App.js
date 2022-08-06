@@ -1,23 +1,38 @@
-import logo from './logo.svg';
+import React, {useState} from 'react';
+import TodoTitle from './components/TodoTitle.js'
+import TodoItem from './components/TodoItem.js'
+import TodoList from './components/TodoList.js'
+import TodoSelect from './components/TodoSelect.js';
 import './App.css';
 
-function App() {
+function App () {
+  const [input, setInput] = useState("");//is used for the input  
+  const [todo, setTodos] = useState([]);
+  const [complete, incomplete] = useState({todo});
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="myApp">
+      <div className='appWrapper'>
+        <div className='topHalf'>
+          <div className='Title'>
+            <TodoTitle/>
+          </div>
+            <div className='newTask'>
+              <TodoItem
+                input = {input}
+                setInput = {setInput}
+                todo = {todo}
+                setTodos = {setTodos}
+              />
+            </div>
+        </div>
+        <div className = 'body'>
+          <TodoList todo={todo} setTodos={setTodos}/>
+        </div>
+        <div className='footer'>
+            <TodoSelect complete={complete} incomplete={incomplete}/>
+        </div>
+      </div>
     </div>
   );
 }
